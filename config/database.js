@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
-mongoose.connect('mongodb://localhost/api-indicator', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+module.exports = {
+  url: `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`,
+};

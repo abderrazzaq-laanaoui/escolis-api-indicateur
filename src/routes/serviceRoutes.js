@@ -1,13 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const serviceController = require('../controllers/serviceController');
+const oapi = require('../../config/openapi');
+const {
+  servicePostEndpoint,
+  servicePutEndpoint,
+  serviceGetByIdEndpoint,
+  serviceGetAllEndpoint,
+  serviceDeleteEndpoint,
+} = require('../../docs/serviceEndpoints');
 
-// Define routes for service management
+const serviceController = require('../controllers/serviceController');
 const { GET, GET_BY_ID, POST, PUT, DELETE } = serviceController();
-router.post('/', POST);
-router.put('/:service_id', PUT);
-router.get('/:service_id', GET_BY_ID);
-router.get('/', GET);
-router.delete('/:service_id', DELETE);
+
+router.post('/', oapi.path(servicePostEndpoint), POST);
+
+router.put('/:service_id', oapi.path(servicePutEndpoint), PUT);
+
+router.get('/:service_id', oapi.path(serviceGetByIdEndpoint), GET_BY_ID);
+
+router.get('/', oapi.path(serviceGetAllEndpoint), GET);
+
+router.delete('/:service_id', oapi.path(serviceDeleteEndpoint), DELETE);
 
 module.exports = router;
