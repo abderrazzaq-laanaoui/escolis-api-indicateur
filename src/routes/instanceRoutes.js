@@ -1,11 +1,41 @@
 const express = require('express');
 const router = express.Router();
-const instanceController = require('../controllers/instanceController');
+const oapi = require('../../config/openapi');
+const {
+  instanceGetByServiceEndpoint,
+  instanceGetAllEndpoint,
+  instanceGetByIdEndpoint,
+  instancePostEndpoint,
+  instanceDeleteEndpoint,
+} = require('../../docs/instanceEndpoints');
+const {
+  getInstancesByService,
+  listInstances,
+  getInstanceById,
+  addInstance,
+  removeInstance,
+} = require('../controllers/instanceController');
 
-// Define routes for instance management
-router.post('/', instanceController.addInstance);
-router.delete('/:instance_id', instanceController.removeInstance);
-router.get('/service/:service_id', instanceController.getInstancesByService);
-router.get('/', instanceController.listInstances);
+router.get(
+  '/service/:service_id',
+  oapi.path(instanceGetByServiceEndpoint),
+  getInstancesByService,
+);
+
+router.get('/', oapi.path(instanceGetAllEndpoint), listInstances);
+
+router.get(
+  '/:instance_id',
+  oapi.path(instanceGetByIdEndpoint),
+  getInstanceById,
+);
+
+router.post('/', oapi.path(instancePostEndpoint), addInstance);
+
+router.delete(
+  '/:instance_id',
+  oapi.path(instanceDeleteEndpoint),
+  removeInstance,
+);
 
 module.exports = router;

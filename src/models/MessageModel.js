@@ -6,11 +6,21 @@ const messageSchema = new mongoose.Schema({
     ref: 'Service',
     required: true,
   },
-  content: {
+  path: {
     type: String,
     required: true,
   },
-  // Define other message properties here
+  method: {
+    type: String,
+    required: true,
+  },
+
+  query: {
+    type: Object,
+  },
+  body: {
+    type: Object,
+  },
 });
 
 module.exports = mongoose.model('Message', messageSchema);

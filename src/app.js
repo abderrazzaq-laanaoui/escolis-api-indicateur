@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const oapi = require('../config/openapi');
+const mongoose = require('mongoose');
+const db_url = require('../config/database').url;
 
 const app = express();
 const port = process.env.NODE_DOCKER_PORT || 8080;
@@ -9,7 +11,22 @@ const port = process.env.NODE_DOCKER_PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(oapi);
-app.use('/', oapi.swaggerui);
+app;
+// database connection
+mongoose
+  .connect(db_url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Database connection established');
+    require('./seed');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// seed data
 
 // Import route modules
 const serviceRoutes = require('./routes/serviceRoutes');
@@ -19,6 +36,7 @@ const messageRoutes = require('./routes/messageRoutes');
 app.use('/api/services', serviceRoutes);
 app.use('/api/instances', instanceRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/', oapi.swaggerui);
 
 // Start the server
 app.listen(port, () => {

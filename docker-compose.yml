@@ -4,7 +4,7 @@ services:
   mongodb:
     image: mongo:5.0.2
     restart: unless-stopped
-    env_file: ./.env
+    env_file: ./.docker.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
       - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
@@ -14,7 +14,7 @@ services:
       - db:/data/db
   api:
     build: .
-    env_file: ./.env
+    env_file: ./.docker.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
     environment:
@@ -25,6 +25,18 @@ services:
       - DB_PORT=$MONGODB_DOCKER_PORT
     depends_on:
       - mongodb
+      - redis
+    redis:
+      image: redis:6.2-alpine
+      env_file: ./.docker.env
+      restart: unless-stopped
+      ports:
+        - $REDIS_LOCAL_PORT:$REDIS_DOCKER_PORT
+      command: redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASSWORD
+      volumes:
+        - redis:/data
 
 volumes:
   db:
+  redis:
+    driver: local

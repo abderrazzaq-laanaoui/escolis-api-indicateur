@@ -8,7 +8,21 @@ const serviceSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  // Define other service properties here
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  serviceSourceId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  instances: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Instance',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Service', serviceSchema);

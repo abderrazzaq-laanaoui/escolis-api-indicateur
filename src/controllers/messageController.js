@@ -1,18 +1,55 @@
-const MessageModel = require('../models/MessageModel');
-
-// Send a message to a service
+const axios = require('axios');
+const InstanceModel = require('../models/InstanceModel');
+const Redis = require('ioredis');
+const redis = new Redis({
+  host: 'redis-container-name', // replace with your actual Redis container name
+});
 const sendMessage = async (req, res) => {
   const { service_id } = req.params;
+  const { path, method, body } = req.body;
+
   try {
-    const message = new MessageModel({
-      serviceId: service_id,
-      content: req.body.content,
+    const instances = await InstanceModel.find({
+      serviceResourceId: service_id,
+    }).lean();
+
+    if (instances.length === 0) {
+      return res.status(404).json({ error: 'Service not found' });
+    }
+
+    // Get the last used instance index from Redis
+    let instanceIndex = await redis.get(
+      `service:${service_id}:lastUsedInstanceIndex`,
+    );
+    instanceIndex = instanceIndex === null ? 0 : Number(instanceIndex);
+
+    // Use modulo to ensure the index is always within the array bounds
+    const instance = instances[instanceIndex % instances.length];
+
+    // Increment the index for the next request and store it in Redis
+    await redis.set(
+      `service:${service_id}:lastUsedInstanceIndex`,
+      (instanceIndex + 1) % instances.length,
+    );
+
+    // Construct the URL for the service instance
+    const url = `http://${instance.hostname}:${instance.port}${path}`;
+
+    // Send the request to the service instance
+    const response = await axios({
+      method,
+      url,
+      headers: req.headers,
+      data: body,
     });
-    await message.save();
-    // Implement logic to dispatch the message to the destination service and return the result
-    res.status(200).json({ message: 'Message sent successfully' }); // 200 OK
+
+    // Send the response back to the client
+    res.json(response.data);
   } catch (error) {
-    res.status(400).json({ error: 'Invalid data' }); // 400 Bad Request
+    console.error(error);
+    res
+      .status(500)
+      .json({ error: 'An error occurred while sending the message' });
   }
 };
 

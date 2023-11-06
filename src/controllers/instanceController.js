@@ -29,8 +29,24 @@ const removeInstance = async (req, res) => {
 const getInstancesByService = async (req, res) => {
   const { service_id } = req.params;
   try {
-    const instances = await InstanceModel.find({ service: service_id });
+    const instances = await InstanceModel.find({
+      serviceResourceId: service_id,
+    });
     res.status(200).json(instances); // 200 OK
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' }); // 500 Internal Server Error
+  }
+};
+
+// Retrieve instance by ID
+const getInstanceById = async (req, res) => {
+  const { instance_id } = req.params;
+  try {
+    const instance = await InstanceModel.findById(instance_id);
+    if (!instance) {
+      return res.status(404).json({ error: 'Instance not found' }); // 404 Not Found
+    }
+    res.status(200).json(instance); // 200 OK
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' }); // 500 Internal Server Error
   }
@@ -51,4 +67,5 @@ module.exports = {
   removeInstance,
   getInstancesByService,
   listInstances,
+  getInstanceById,
 };

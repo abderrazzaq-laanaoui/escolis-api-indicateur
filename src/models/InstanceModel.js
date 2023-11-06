@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const instanceSchema = new mongoose.Schema({
-  service: {
-    type: mongoose.Schema.Types.ObjectId,
+  serviceResourceId: {
+    type: String,
     ref: 'Service',
     required: true,
   },
@@ -14,7 +14,15 @@ const instanceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // Define other instance properties here
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  status: {
+    type: String,
+    enum: ['UP', 'DOWN'],
+    default: 'UP',
+  },
 });
 
 module.exports = mongoose.model('Instance', instanceSchema);
