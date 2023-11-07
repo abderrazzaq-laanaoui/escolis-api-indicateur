@@ -2,8 +2,10 @@ const axios = require('axios');
 const InstanceModel = require('../models/InstanceModel');
 const Redis = require('ioredis');
 const redis = new Redis({
-  host: 'redis-container-name', // replace with your actual Redis container name
+  host: 'localhost',
+  port: 6379,
 });
+
 const sendMessage = async (req, res) => {
   const { service_id } = req.params;
   const { path, method, body } = req.body;
