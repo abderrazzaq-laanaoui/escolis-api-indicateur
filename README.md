@@ -1,5 +1,4 @@
 # ECOLIS-API-Indicateur
-# Project Name README
 
 This README file provides instructions on how to run the project using Docker Compose. Make sure to follow the prerequisites and create the required `.env` file before running the project.
 
