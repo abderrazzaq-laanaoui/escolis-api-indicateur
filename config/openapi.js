@@ -2,7 +2,7 @@ const openapi = require('@wesleytodd/openapi');
 const oapi = openapi({
   openapi: '3.0.0',
   info: {
-    title: 'Express Application',
+    title: 'E-SCOLIS API Indicator',
     description:
       'This is the API documentation for the API Indicator microservice.',
     version: '1.0.0',

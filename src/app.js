@@ -33,9 +33,9 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const instanceRoutes = require('./routes/instanceRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 
-app.use('/api/services', serviceRoutes);
-app.use('/api/instances', instanceRoutes);
-app.use('/api/messages', messageRoutes);
+app.use('/api/v1/services', serviceRoutes);
+app.use('/api/v1/instances', instanceRoutes);
+app.use('/api/v1/messages', messageRoutes);
 app.use('/', oapi.swaggerui);
 
 // Start the server
