@@ -28,3 +28,18 @@ REDIS_LOCAL_PORT=6379
 REDIS_DOCKER_PORT=6379
 REDIS_PASSWORD=123456
 NODE_JWKS_URI=http://localhost:6868/.well-known/jwks.json
+```
+You can modify the values in this file according to your project requirements.
+
+## Running the Project
+To run the project, use the following command in your terminal:
+
+```bash
+docker-compose --env-file docker.env up --build -d
+```
+`--env-file docker.env`  : Specifies the environment file to use for the Docker Compose configuration. \
+`up` : Starts the defined services. \
+`--build` : Builds images before starting containers. \
+`-d` : Runs containers in detached mode, allowing them to run in the background. \
+
+Once the command is executed, the services defined in your `docker-compose.yml` file will be up and running. You can access your application using the appropriate ports and endpoints.
