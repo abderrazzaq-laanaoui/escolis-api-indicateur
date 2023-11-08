@@ -43,3 +43,18 @@ docker-compose --env-file docker.env up --build -d
 `-d` : Runs containers in detached mode, allowing them to run in the background. \
 
 Once the command is executed, the services defined in your `docker-compose.yml` file will be up and running. You can access your application using the appropriate ports and endpoints.
+
+## Exploring Endpoints with Swagger UI
+
+After successfully running the project using Docker Compose, you can explore and interact with the available API endpoints using Swagger UI. Swagger UI is accessible at `http://localhost:6868`, where you can view and test the API's functionality.
+
+Open a web browser and navigate to [http://localhost:6868](http://localhost:6868) to access the Swagger UI.
+
+Swagger UI provides a user-friendly interface to browse and execute API requests. It also includes detailed documentation and examples on how to use each endpoint. This is an excellent resource for developers to understand the API and its capabilities.
+
+## Explore Endpoints with Swagger UI
+
+After running the project with Docker Compose, you can explore the available API endpoints using Swagger UI. Access it at [http://localhost:6868](http://localhost:6868) to interact with and test the API.
+
+For more information and detailed documentation, refer to the [openAPI Specifications](https://swagger.io/specification/).
+
