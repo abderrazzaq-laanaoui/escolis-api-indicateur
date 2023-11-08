@@ -18,7 +18,7 @@ const instanceGetByServiceEndpoint = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/definitions/Instance',
+              $ref: '#/components/schemas/InstanceResponse',
             },
           },
         },
@@ -43,7 +43,7 @@ const instanceGetAllEndpoint = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/definitions/Instance',
+              $ref: '#/components/schemas/InstanceResponse',
             },
           },
         },
@@ -74,7 +74,7 @@ const instanceGetByIdEndpoint = {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/definitions/Instance',
+            $ref: '#/components/schemas/InstanceResponse',
           },
         },
       },
@@ -98,7 +98,7 @@ const instancePostEndpoint = {
     content: {
       'application/json': {
         schema: {
-          $ref: '#/definitions/Instance',
+          $ref: '#/components/schemas/InstanceRequest',
         },
       },
     },
@@ -109,7 +109,7 @@ const instancePostEndpoint = {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/definitions/Instance',
+            $ref: '#/components/schemas/InstanceResponse',
           },
         },
       },

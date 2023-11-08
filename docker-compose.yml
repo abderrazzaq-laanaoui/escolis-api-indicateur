@@ -23,6 +23,10 @@ services:
       - DB_PASSWORD=$MONGODB_PASSWORD
       - DB_NAME=$MONGODB_DATABASE
       - DB_PORT=$MONGODB_DOCKER_PORT
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+      - REDIS_PORT=$REDIS_DOCKER_PORT
+      - NODE_JWKS_URI=$NODE_JWKS_URI
     depends_on:
       - mongodb
       - redis

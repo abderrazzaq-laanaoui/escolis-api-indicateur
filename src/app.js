@@ -11,7 +11,7 @@ const port = process.env.NODE_DOCKER_PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(oapi);
-app;
+
 // database connection
 mongoose
   .connect(db_url, {

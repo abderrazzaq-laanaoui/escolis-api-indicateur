@@ -10,7 +10,7 @@ const serviceGetAllEndpoint = {
           schema: {
             type: 'array',
             items: {
-              $ref: '#/definitions/Service',
+              $ref: '#/components/schemas/ServiceResponse',
             },
           },
         },
@@ -40,19 +40,7 @@ const serviceGetByIdEndpoint = {
       content: {
         'application/json': {
           schema: {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                description: 'The ID of the retrieved service.',
-              },
-              name: { type: 'string', description: 'The name of the service.' },
-              description: {
-                type: 'string',
-                description: 'A brief description of the service.',
-              },
-              // Add other properties here
-            },
+            $ref: '#/components/schemas/ServiceResponse',
           },
         },
       },
@@ -75,16 +63,7 @@ const servicePostEndpoint = {
     content: {
       'application/json': {
         schema: {
-          type: 'object',
-          properties: {
-            name: { type: 'string', description: 'The name of the service.' },
-            description: {
-              type: 'string',
-              description: 'A brief description of the service.',
-            },
-            // Add other properties here
-          },
-          required: ['name'],
+          ref: '#/components/schemas/ServiceRequest',
         },
       },
     },
@@ -95,19 +74,7 @@ const servicePostEndpoint = {
       content: {
         'application/json': {
           schema: {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                description: 'The ID of the created service.',
-              },
-              name: { type: 'string', description: 'The name of the service.' },
-              description: {
-                type: 'string',
-                description: 'A brief description of the service.',
-              },
-              // Add other properties here
-            },
+            $ref: '#/components/schemas/ServiceResponse',
           },
         },
       },
@@ -139,15 +106,7 @@ const servicePutEndpoint = {
     content: {
       'application/json': {
         schema: {
-          type: 'object',
-          properties: {
-            name: { type: 'string', description: 'The name of the service.' },
-            description: {
-              type: 'string',
-              description: 'A brief description of the service.',
-            },
-            // Add other properties here
-          },
+          ref: '#/components/schemas/ServiceRequest',
         },
       },
     },
@@ -158,19 +117,7 @@ const servicePutEndpoint = {
       content: {
         'application/json': {
           schema: {
-            type: 'object',
-            properties: {
-              id: {
-                type: 'string',
-                description: 'The ID of the updated service.',
-              },
-              name: { type: 'string', description: 'The name of the service.' },
-              description: {
-                type: 'string',
-                description: 'A brief description of the service.',
-              },
-              // Add other properties here
-            },
+            $ref: '#/components/schemas/ServiceResponse',
           },
         },
       },

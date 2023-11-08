@@ -1,4 +1,3 @@
-
 const Service = require('./models/ServiceModel');
 const Instance = require('./models/InstanceModel');
 
@@ -21,7 +20,6 @@ async function seedDatabase() {
         serviceResourceId: service.serviceSourceId,
         hostname: `hostname${j}`,
         port: 3000 + j,
-        status: j % 2 === 0 ? 'UP' : 'DOWN',
       });
 
       await instance.save();

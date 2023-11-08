@@ -15,25 +15,7 @@ const sendMessageEndpoint = {
     content: {
       'application/json': {
         schema: {
-          type: 'object',
-          properties: {
-            path: {
-              type: 'string',
-              description:
-                'The path of the request to send to the service instance',
-            },
-            method: {
-              type: 'string',
-              description:
-                'The HTTP method of the request to send to the service instance',
-            },
-            body: {
-              type: 'object',
-              description:
-                'The body of the request to send to the service instance',
-            },
-          },
-          required: ['path', 'method'],
+          $ref: '#/components/schemas/MessageRequest',
         },
       },
     },
