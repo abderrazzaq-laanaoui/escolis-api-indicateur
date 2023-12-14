@@ -1,0 +1,9 @@
+config:
+  target: 'http://localhost:6868' # replace with your server URL
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - get:
+          url: '/api/v1/services' # replace with your endpoint

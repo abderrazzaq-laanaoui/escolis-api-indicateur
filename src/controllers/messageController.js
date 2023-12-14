@@ -1,7 +1,13 @@
+require('dotenv').config();
 const axios = require('axios');
 const InstanceModel = require('../models/InstanceModel');
 const Redis = require('ioredis');
-const redis = new Redis('redis://:123456@redis:6379/0');
+const redis_host = process.env.REDIS_HOST;
+const redis_port = process.env.REDIS_PORT;
+const redis_password = process.env.REDIS_PASSWORD;
+const redis = new Redis(
+  `redis://:${redis_password}@${redis_host}:${redis_port}/0`,
+);
 
 const sendMessage = async (req, res) => {
   const { service_id } = req.params;

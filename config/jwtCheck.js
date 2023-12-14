@@ -9,7 +9,7 @@ const jwtCheck = jwt({
   }),
   audience: process.env.NODE_JWKS_AUDIENCE,
   issuer: process.env.NODE_JWKS_ISSUER,
-  algorithms: ['RS256'],
+  algorithms: [process.env.NODE_JWKS_ALGORITHMS],
 });
 
 module.exports = jwtCheck;
