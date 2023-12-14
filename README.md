@@ -20,6 +20,7 @@ MONGODB_DATABASE=esclois_db
 MONGODB_LOCAL_PORT=27017
 MONGODB_DOCKER_PORT=27017
 
+NODE_ENV=production
 NODE_LOCAL_PORT=6868
 NODE_DOCKER_PORT=8080
 
@@ -27,7 +28,11 @@ REDIS_HOST=redis
 REDIS_LOCAL_PORT=6379
 REDIS_DOCKER_PORT=6379
 REDIS_PASSWORD=123456
+
 NODE_JWKS_URI=http://localhost:6868/.well-known/jwks.json
+NODE_JWKS_AUDIENCE=esclois
+NODE_JWKS_ISSUER=http://localhost:6868
+NODE_JWKS_ALGORITHMS=RS256
 ```
 You can modify the values in this file according to your project requirements.
 
@@ -46,7 +51,7 @@ Once the command is executed, the services defined in your `docker-compose.yml` 
 
 ## Explore Endpoints with Swagger UI
 
-After running the project with Docker Compose, you can explore the available API endpoints using Swagger UI. Access it at [http://localhost:6868](http://localhost:6868) to interact with and test the API.
+After running the project with Docker Compose, you can explore the available API endpoints using Swagger UI. Access it at [http://localhost:6868](http://localhost:6868) for this example to interact with and test the API.
 
 For more information and detailed documentation, refer to the [openAPI Specifications](https://swagger.io/specification/).
 
